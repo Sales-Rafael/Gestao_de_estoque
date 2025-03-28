@@ -1,4 +1,3 @@
-```markdown
 # Sistema de Gestão de Estoque  
 
 Este é um sistema de gestão de estoque desenvolvido em **Excel** e **JavaScript** (usando **Google Apps Script**) para automatizar o registro de retiradas e devoluções de produtos. O sistema foi projetado para garantir precisão, rastreabilidade e simplicidade no controle de estoque.  
@@ -32,7 +31,7 @@ Este é um sistema de gestão de estoque desenvolvido em **Excel** e **JavaScrip
 ---
 
 ## 📂 Estrutura do Projeto  
-```
+```markdown
 📦 Sistema de Gestão de Estoque  
 ├── 📄 gerenciamento de estoque.xlsx → Arquivo da planilha com abas para retirada, devolução e registro  
 ├── 📄 script.js → Código em Google Apps Script para registrar retiradas e devoluções  
