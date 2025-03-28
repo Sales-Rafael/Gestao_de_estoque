@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InventTech - Controle de Protocolos e Estoque</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            border-top: 5px solid #FF6B00;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .site-title {
+            color: #FF6B00; /* Laranja */
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .site-subtitle {
+            color: #0056b3; /* Azul */
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        input:focus {
+            border-color: #0056b3; /* Azul */
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+        }
+        
+        button {
+            background-color: #FF6B00; /* Laranja */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background-color: #E05D00; /* Laranja mais escuro */
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo img {
+            max-width: 180px;
+            height: auto;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .section-title {
+            color: #0056b3; /* Azul */
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #FF6B00; /* Laranja */
+        }
+        
+        .devolver-btn {
+            background-color: #cc0000;
+        }
+        
+        .devolver-btn:hover {
+            background-color: #e60000;
+        }
+        
+        .estoque-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        
+        .info-box {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            text-align: center;
+            flex: 1;
+            background-color: #f9f9f9;
+            border-top: 3px solid #0056b3; /* Azul */
+        }
+        
+        .info-label {
+            font-weight: bold;
+            color: #FF6B00; /* Laranja */
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        
+        .info-value {
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .buscar-btn {
+            background-color: #0056b3; /* Azul */
+        }
+        
+        .buscar-btn:hover {
+            background-color: #004494; /* Azul mais escuro */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="site-title">InventTech</div>
+            <div class="site-subtitle">Sistema de Controle de Protocolos e Estoque</div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Inserir Protocolo</div>
+            <form id="consultaForm">
+                <div class="form-group">
+                    <label for="protusp">Código Produto:</label>
+                    <input type="text" id="protusp" name="protusp" placeholder="Digite o código ProtUSP" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="colaborador">Código do Colaborador:</label>
+                    <input type="text" id="colaborador" name="colaborador" placeholder="Digite o código do colaborador" required>
+                </div>
+                
+                <button type="submit">Inserir</button>
+            </form>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Devolver Protocolo</div>
+            <form id="devolucaoForm">
+                <div class="form-group">
+                    <label for="recibo">Código do Recibo:</label>
+                    <input type="text" id="recibo" name="recibo" placeholder="Digite o código do recibo" required>
+                </div>
+                
+                <button type="submit" class="devolver-btn">Devolver</button>
+            </form>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Consulta de Estoque</div>
+            <form id="buscaForm">
+                <div class="form-group">
+                    <label for="busca">Buscar Produto:</label>
+                    <input type="text" id="busca" name="busca" placeholder="Digite o nome ou código do produto" required>
+                </div>
+                
+                <button type="submit" class="buscar-btn">Buscar</button>
+            </form>
+            
+            <div class="estoque-info">
+                <div class="info-box">
+                    <div class="info-label">Disponibilidade</div>
+                    <div class="info-value">-</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">Nome do Produto</div>
+                    <div class="info-value">-</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-label">Quantidade em Estoque</div>
+                    <div class="info-value">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
