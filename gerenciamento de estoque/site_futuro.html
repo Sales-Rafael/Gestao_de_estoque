@@ -5,44 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InventTech - Controle de Protocolos e Estoque</title>
     <style>
+        :root {
+            --bg-color: #f5f5f5;
+            --container-bg: white;
+            --text-color: #333;
+            --border-color: #ddd;
+            --primary-color: #FF6B00;
+            --primary-hover: #E05D00;
+            --secondary-color: #0056b3;
+            --secondary-hover: #004494;
+            --info-bg: #f9f9f9;
+            --success-bg: #d4edda;
+            --success-text: #155724;
+            --success-border: #c3e6cb;
+            --error-bg: #f8d7da;
+            --error-text: #721c24;
+            --error-border: #f5c6cb;
+        }
+
+        .dark-mode {
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --border-color: #444;
+            --primary-color: #FF8B33;
+            --primary-hover: #FF6B00;
+            --secondary-color: #4a89dc;
+            --secondary-hover: #3a70c2;
+            --info-bg: #2d2d2d;
+            --success-bg: #1e3a1e;
+            --success-text: #a8d8a8;
+            --success-border: #2d5a2d;
+            --error-bg: #3a1e1e;
+            --error-text: #ffa8a8;
+            --error-border: #5a2d2d;
+        }
+
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
+            background-color: var(--bg-color);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: #333;
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
         }
         
         .container {
-            background-color: white;
+            background-color: var(--container-bg);
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 30px;
             width: 100%;
             max-width: 600px;
-            border-top: 5px solid #FF6B00;
+            border-top: 5px solid var(--primary-color);
+            transition: background-color 0.3s, border-color 0.3s;
         }
         
         .header {
             text-align: center;
             margin-bottom: 25px;
+            position: relative;
         }
         
         .site-title {
-            color: #FF6B00; /* Laranja */
+            color: var(--primary-color);
             font-size: 28px;
             font-weight: bold;
             margin-bottom: 5px;
+            transition: color 0.3s;
         }
         
         .site-subtitle {
-            color: #0056b3; /* Azul */
+            color: var(--secondary-color);
             font-size: 16px;
             margin-bottom: 20px;
+            transition: color 0.3s;
         }
         
         .form-group {
@@ -53,26 +94,30 @@
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: #555;
+            color: var(--text-color);
+            transition: color 0.3s;
         }
         
-        input {
+        input, select {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             font-size: 16px;
             box-sizing: border-box;
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            transition: border-color 0.3s, background-color 0.3s, color 0.3s;
         }
         
-        input:focus {
-            border-color: #0056b3; /* Azul */
+        input:focus, select:focus {
+            border-color: var(--secondary-color);
             outline: none;
             box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
         }
         
         button {
-            background-color: #FF6B00; /* Laranja */
+            background-color: var(--primary-color);
             color: white;
             border: none;
             padding: 12px 20px;
@@ -86,37 +131,21 @@
         }
         
         button:hover {
-            background-color: #E05D00; /* Laranja mais escuro */
+            background-color: var(--primary-hover);
         }
         
-        .logo {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        
-        .logo img {
-            max-width: 180px;
-            height: auto;
-        }
-        
-        .section {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
         }
         
         .section-title {
-            color: #0056b3; /* Azul */
+            color: var(--secondary-color);
             font-size: 18px;
             margin-bottom: 15px;
             padding-bottom: 5px;
-            border-bottom: 2px solid #FF6B00; /* Laranja */
+            border-bottom: 2px solid var(--primary-color);
+            transition: color 0.3s, border-color 0.3s;
         }
         
         .devolver-btn {
@@ -135,42 +164,134 @@
         }
         
         .info-box {
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 5px;
             padding: 15px;
             text-align: center;
             flex: 1;
-            background-color: #f9f9f9;
-            border-top: 3px solid #0056b3; /* Azul */
+            background-color: var(--info-bg);
+            border-top: 3px solid var(--secondary-color);
+            min-height: 80px;
+            transition: background-color 0.3s, border-color 0.3s;
         }
         
         .info-label {
             font-weight: bold;
-            color: #FF6B00; /* Laranja */
+            color: var(--primary-color);
             margin-bottom: 5px;
             font-size: 14px;
+            transition: color 0.3s;
         }
         
         .info-value {
             font-size: 16px;
-            color: #333;
+            color: var(--text-color);
+            transition: color 0.3s;
         }
         
         .buscar-btn {
-            background-color: #0056b3; /* Azul */
+            background-color: var(--secondary-color);
         }
         
         .buscar-btn:hover {
-            background-color: #004494; /* Azul mais escuro */
+            background-color: var(--secondary-hover);
+        }
+        
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            display: none;
+        }
+        
+        .success {
+            background-color: var(--success-bg);
+            color: var(--success-text);
+            border: 1px solid var(--success-border);
+        }
+        
+        .error {
+            background-color: var(--error-bg);
+            color: var(--error-text);
+            border: 1px solid var(--error-border);
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .button-container {
+            position: relative;
+        }
+        
+        .button-text {
+            transition: opacity 0.3s;
+        }
+        
+        .hidden {
+            opacity: 0;
+        }
+
+        /* Botão de alternância de tema */
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-toggle i {
+            transition: transform 0.3s;
+        }
+
+        .dark-mode .theme-toggle i {
+            transform: rotate(180deg);
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
+            <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
             <div class="site-title">InventTech</div>
             <div class="site-subtitle">Sistema de Controle de Protocolos e Estoque</div>
         </div>
+        
+        <div id="messageContainer"></div>
         
         <div class="section">
             <div class="section-title">Inserir Protocolo</div>
@@ -185,7 +306,21 @@
                     <input type="text" id="colaborador" name="colaborador" placeholder="Digite o código do colaborador" required>
                 </div>
                 
-                <button type="submit">Inserir</button>
+                <div class="form-group">
+                    <label for="tipo">Tipo de Operação:</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="">Selecione...</option>
+                        <option value="emprestimo">Empréstimo</option>
+                        <option value="devolucao">Devolução</option>
+                        <option value="transferencia">Transferência</option>
+                    </select>
+                </div>
+                
+                <div class="button-container">
+                    <button type="submit" id="inserirBtn">
+                        <span class="button-text">Inserir</span>
+                    </button>
+                </div>
             </form>
         </div>
         
@@ -197,7 +332,11 @@
                     <input type="text" id="recibo" name="recibo" placeholder="Digite o código do recibo" required>
                 </div>
                 
-                <button type="submit" class="devolver-btn">Devolver</button>
+                <div class="button-container">
+                    <button type="submit" class="devolver-btn" id="devolverBtn">
+                        <span class="button-text">Devolver</span>
+                    </button>
+                </div>
             </form>
         </div>
         
@@ -209,24 +348,261 @@
                     <input type="text" id="busca" name="busca" placeholder="Digite o nome ou código do produto" required>
                 </div>
                 
-                <button type="submit" class="buscar-btn">Buscar</button>
+                <div class="button-container">
+                    <button type="submit" class="buscar-btn" id="buscarBtn">
+                        <span class="button-text">Buscar</span>
+                    </button>
+                </div>
             </form>
             
             <div class="estoque-info">
                 <div class="info-box">
                     <div class="info-label">Disponibilidade</div>
-                    <div class="info-value">-</div>
+                    <div class="info-value" id="disponibilidade">-</div>
                 </div>
                 <div class="info-box">
                     <div class="info-label">Nome do Produto</div>
-                    <div class="info-value">-</div>
+                    <div class="info-value" id="nomeProduto">-</div>
                 </div>
                 <div class="info-box">
                     <div class="info-label">Quantidade em Estoque</div>
-                    <div class="info-value">-</div>
+                    <div class="info-value" id="quantidadeEstoque">-</div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos do DOM
+            const consultaForm = document.getElementById('consultaForm');
+            const devolucaoForm = document.getElementById('devolucaoForm');
+            const buscaForm = document.getElementById('buscaForm');
+            const messageContainer = document.getElementById('messageContainer');
+            const themeToggle = document.getElementById('themeToggle');
+            
+            // Botões
+            const inserirBtn = document.getElementById('inserirBtn');
+            const devolverBtn = document.getElementById('devolverBtn');
+            const buscarBtn = document.getElementById('buscarBtn');
+            
+            // Elementos de estoque
+            const disponibilidadeEl = document.getElementById('disponibilidade');
+            const nomeProdutoEl = document.getElementById('nomeProduto');
+            const quantidadeEstoqueEl = document.getElementById('quantidadeEstoque');
+            
+            // Dados mockados para simulação
+            const estoque = {
+                'PROT001': { nome: 'Microscópio Óptico', quantidade: 5, disponivel: true },
+                'PROT002': { nome: 'Centrífuga', quantidade: 3, disponivel: true },
+                'PROT003': { nome: 'Termociclador', quantidade: 2, disponivel: false },
+                'PROT004': { nome: 'Espectrofotômetro', quantidade: 1, disponivel: true },
+                'PROT005': { nome: 'Autoclave', quantidade: 4, disponivel: true }
+            };
+            
+            const colaboradores = ['COL001', 'COL002', 'COL003', 'COL004', 'COL005'];
+            const protocolosAtivos = {};
+            
+            // Verificar preferência de tema do usuário
+            const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+            if (prefersDarkScheme.matches) {
+                document.body.classList.add('dark-mode');
+            }
+            
+            // Alternar tema
+            themeToggle.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                
+                // Salvar preferência no localStorage
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+            });
+            
+            // Verificar tema salvo no localStorage
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+            
+            // Função para mostrar mensagens
+            function showMessage(type, text) {
+                const message = document.createElement('div');
+                message.className = `message ${type}`;
+                message.textContent = text;
+                messageContainer.innerHTML = '';
+                messageContainer.appendChild(message);
+                message.style.display = 'block';
+                
+                setTimeout(() => {
+                    message.style.display = 'none';
+                }, 5000);
+            }
+            
+            // Função para mostrar loading
+            function showLoading(button) {
+                const buttonText = button.querySelector('.button-text');
+                buttonText.classList.add('hidden');
+                
+                const loading = document.createElement('span');
+                loading.className = 'loading';
+                button.appendChild(loading);
+                
+                button.disabled = true;
+            }
+            
+            // Função para esconder loading
+            function hideLoading(button, text) {
+                const loading = button.querySelector('.loading');
+                if (loading) loading.remove();
+                
+                const buttonText = button.querySelector('.button-text');
+                buttonText.textContent = text;
+                buttonText.classList.remove('hidden');
+                
+                button.disabled = false;
+            }
+            
+            // Formulário de inserção de protocolo
+            consultaForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showLoading(inserirBtn);
+                
+                const protusp = document.getElementById('protusp').value;
+                const colaborador = document.getElementById('colaborador').value;
+                const tipo = document.getElementById('tipo').value;
+                
+                // Simular processamento assíncrono
+                setTimeout(() => {
+                    if (!estoque[protusp]) {
+                        showMessage('error', 'Produto não encontrado no estoque!');
+                        hideLoading(inserirBtn, 'Inserir');
+                        return;
+                    }
+                    
+                    if (!estoque[protusp].disponivel) {
+                        showMessage('error', 'Produto não disponível para empréstimo!');
+                        hideLoading(inserirBtn, 'Inserir');
+                        return;
+                    }
+                    
+                    if (!colaboradores.includes(colaborador)) {
+                        showMessage('error', 'Colaborador não cadastrado!');
+                        hideLoading(inserirBtn, 'Inserir');
+                        return;
+                    }
+                    
+                    if (estoque[protusp].quantidade <= 0) {
+                        showMessage('error', 'Quantidade em estoque insuficiente!');
+                        hideLoading(inserirBtn, 'Inserir');
+                        return;
+                    }
+                    
+                    // Gerar recibo aleatório
+                    const recibo = 'REC' + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+                    
+                    // Registrar protocolo
+                    protocolosAtivos[recibo] = {
+                        protusp,
+                        colaborador,
+                        tipo,
+                        data: new Date().toLocaleString()
+                    };
+                    
+                    // Atualizar estoque
+                    estoque[protusp].quantidade--;
+                    if (estoque[protusp].quantidade <= 0) {
+                        estoque[protusp].disponivel = false;
+                    }
+                    
+                    showMessage('success', `Protocolo registrado com sucesso! Recibo: ${recibo}`);
+                    consultaForm.reset();
+                    hideLoading(inserirBtn, 'Inserir');
+                }, 1500);
+            });
+            
+            // Formulário de devolução de protocolo
+            devolucaoForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showLoading(devolverBtn);
+                
+                const recibo = document.getElementById('recibo').value;
+                
+                // Simular processamento assíncrono
+                setTimeout(() => {
+                    if (!protocolosAtivos[recibo]) {
+                        showMessage('error', 'Recibo não encontrado ou já devolvido!');
+                        hideLoading(devolverBtn, 'Devolver');
+                        return;
+                    }
+                    
+                    const protocolo = protocolosAtivos[recibo];
+                    const protusp = protocolo.protusp;
+                    
+                    // Atualizar estoque
+                    estoque[protusp].quantidade++;
+                    estoque[protusp].disponivel = true;
+                    
+                    // Remover protocolo
+                    delete protocolosAtivos[recibo];
+                    
+                    showMessage('success', `Devolução registrada com sucesso para o produto ${protusp}!`);
+                    devolucaoForm.reset();
+                    hideLoading(devolverBtn, 'Devolver');
+                }, 1500);
+            });
+            
+            // Formulário de busca no estoque
+            buscaForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                showLoading(buscarBtn);
+                
+                const busca = document.getElementById('busca').value.toUpperCase();
+                
+                // Simular processamento assíncrono
+                setTimeout(() => {
+                    let produtoEncontrado = null;
+                    
+                    // Buscar por código
+                    if (estoque[busca]) {
+                        produtoEncontrado = estoque[busca];
+                    } else {
+                        // Buscar por nome (simulação simples)
+                        for (const codigo in estoque) {
+                            if (estoque[codigo].nome.toUpperCase().includes(busca)) {
+                                produtoEncontrado = estoque[codigo];
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if (produtoEncontrado) {
+                        disponibilidadeEl.textContent = produtoEncontrado.disponivel ? 'Disponível' : 'Indisponível';
+                        disponibilidadeEl.style.color = produtoEncontrado.disponivel ? 'green' : 'red';
+                        nomeProdutoEl.textContent = produtoqueEncontrado.nome;
+                        quantidadeEstoqueEl.textContent = produtoEncontrado.quantidade;
+                        
+                        showMessage('success', 'Produto encontrado no estoque!');
+                    } else {
+                        disponibilidadeEl.textContent = '-';
+                        nomeProdutoEl.textContent = '-';
+                        quantidadeEstoqueEl.textContent = '-';
+                        
+                        showMessage('error', 'Produto não encontrado no estoque!');
+                    }
+                    
+                    hideLoading(buscarBtn, 'Buscar');
+                }, 1000);
+            });
+            
+            // Validação em tempo real para o campo de colaborador
+            document.getElementById('colaborador').addEventListener('input', function(e) {
+                const colaborador = e.target.value;
+                if (colaborador && !colaboradores.includes(colaborador)) {
+                    e.target.setCustomValidity('Colaborador não cadastrado');
+                } else {
+                    e.target.setCustomValidity('');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
